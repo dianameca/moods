@@ -1,0 +1,288 @@
+/* style.css */
+
+:root {
+  --background-color: #fff;
+  --text-color: #000;
+  --link-color: rgb(231, 58, 52);
+  --box-shadow: 1px 5px 20px #a2c2f8;
+}
+
+html[data-theme='light'] {
+  --background-color: #fff;
+  --text-color: #000;
+  --link-color: rgb(231, 58, 52);
+  --box-shadow: 1px 5px 20px #a2c2f8;
+}
+
+html[data-theme='color'] {
+  --background-color: #ffc5eb;
+  --text-color: #000;
+  --link-color: rgb(231, 58, 52);
+  --box-shadow: none;
+}
+
+html[data-theme='dark'] {
+  --background-color: #000;
+  --text-color: #F7F8F8;
+  --link-color: rgb(231, 58, 52);
+  --box-shadow: none;
+}
+
+/************* OVERALLS **************/
+html {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 20px;
+}
+html a {
+  color: var(--text-color);
+}
+a:hover {
+  color:rgb(231, 58, 52);
+}
+img {
+  width: 500px;
+  height: 300px;
+  padding: 5px;
+  margin: 10px auto;
+  max-width: 100%;
+  position: relative;
+  animation: glide 2s ease-in-out alternate infinite;
+}
+
+/************* BUTTON **************/
+button {
+  border: 3px solid #000;
+  text-shadow: 2px 2px 2px #a2c2f8;
+  /*box-shadow: 5px 5px 5px #a2c2f8;*/
+  border-radius: 3px;
+  background-color: #fff;
+  padding: 15px 20px 15px 20px;
+  margin: 10px;
+  font: inherit;
+  letter-spacing: 2px;
+  font-size: 105%;
+  cursor: pointer;
+}
+button:hover {
+  background-color: rgb(0, 0, 0);
+  color: red;
+  text-shadow: none;
+  box-shadow: none;
+}
+#mode {
+  border: none;
+  font-size: x-small;
+  display: flex;
+  margin-right: auto;
+  margin-top: -20px;
+  margin-left: -5px;
+  padding: 10px;
+  text-shadow: none;
+}
+#mode:hover {
+  background-color: #fff;
+}
+#hide {
+  background-color: #fff;
+  text-shadow: none;
+}
+
+/*************** SECTIONS ****************/
+#selected-mood {
+  border-radius: 7px;
+  margin-bottom: 20px;
+  padding: 40px;
+  /*background-color: aquamarine;*/
+  box-shadow: var(--box-shadow);
+}
+#countdown {
+  border-radius: 7px;
+  padding: 40px;
+  /*background-color: rgb(11, 245, 245);*/
+  box-shadow: var(--box-shadow);
+}
+#moods {
+  border-radius: 7px;
+  padding: 30px;
+  color: var(--text-color);
+  /*background-color: rgba(253, 84, 84, 0.938);*/
+  box-shadow: var(--box-shadow);
+}
+#toggleAudio {
+  margin-top: 50px;
+  text-shadow: none;
+  background-color: #fff;
+}
+
+/*************** LAYOUT ***************/
+.container {
+  display: flex;
+}
+.section {
+  padding: 15px;
+  text-align: center;
+  flex: 1;
+  /* border: 1px solid rgb(209, 209, 209);
+     just to see the spacing better */
+}
+
+/*********** TABLE ************/
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+th,td {
+  text-align: left;
+  padding: 5px 10px 5px 10px;
+  color: var(--text-color);
+}
+
+/*********** FOOTER ************/
+footer {
+  font-size: 13px;
+  bottom: 5px;
+  right: 5px;
+  position: fixed;
+  font-style: italic;
+}
+.wrapper {
+  height: 380px;
+  position: relative;
+  margin: 30px 10px 30px 10px;
+  box-shadow: var(--box-shadow);
+  border-radius: 7px;
+  /*background-color: rgba(253, 84, 84, 0.938)*/;
+}
+/* stop button messes with this */
+@keyframes rock {
+  0% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+}
+@keyframes wave {
+  0% { transform: rotate(10deg); }
+  50% { transform: rotate(-30deg); }
+}
+@keyframes waveLarm1 {
+  0% { transform: rotate(-80deg); }
+  40% { transform: rotate(-70deg); }
+}
+@keyframes waveRarm1 {
+  0% { transform: rotate(80deg); }
+  40% { transform: rotate(70deg); }
+}
+@keyframes waveLarm2 {
+  100% { transform: rotate(360deg); }
+}
+@keyframes waveRarm2 {
+  0% { transform: rotate(30deg); }
+  100% { transform: rotate(70deg); }
+}
+@keyframes waveLarm3 {
+  0% { transform: rotate(-30deg); }
+  100% { transform: rotate(20deg); }
+}
+@keyframes waveRarm3 {
+  0% { transform: rotate(-30deg); }
+  100% { transform: rotate(-30deg); }
+}
+
+.head, .torso, .leftleg, 
+.rightleg, .rightarm, .leftarm, 
+.rightfoot, .leftfoot {
+  border: 4px solid #000;
+  background-color: #fff;
+  border-radius: 4px;
+  display: block;
+  position: absolute;
+  background-color: rgba(229, 229, 229, 1);
+}
+.head {
+  width: 52px;
+  height: 58px;
+  border-radius: 50%;
+  top: 50px;
+  left: calc(50% - 22px);
+  z-index: 1;
+  animation: rock 0.8s alternate infinite;
+  transform-origin: center bottom;
+}
+.torso {
+  width: 17px;
+  height: 85px;
+  top: 118px;
+  z-index: 2;
+  left: calc(50% - 4.5px);;
+}
+.leftleg {
+  width: 9px;
+  height: 103px;
+  top: 200px;
+  z-index: 3;
+  left: calc(50% - 5px);
+  transform: rotate(15deg);
+  transform-origin: top;
+}
+.rightleg {
+  width: 9px;
+  height: 103px;
+  top: 200px;
+  z-index: 2;
+  left: calc(50% + 5px);
+  transform: rotate(-12deg);
+  transform-origin: top;
+}
+.leftarm {
+  width: 80px;
+  height: 7px;
+  top: 120px;
+  z-index: 3;
+  left: calc(50% - 87px);
+  transform: rotate(-70deg);
+  transform-origin: 100%;
+}
+.rightarm {
+  width: 77px;
+  height: 7px;
+  top: 123px;
+  left: calc(50% + 14px);
+  transform: rotate(70deg);
+  transform-origin: 0%;
+}
+.leftfoot {
+  width: 30px;
+  height: 9px;
+  top: 303px;
+  z-index: 3;
+  left: calc(50% - 34px);
+  transform: rotate(8deg);
+}
+.rightfoot {
+  width: 30px;
+  height: 9px;
+  top: 298px;
+  z-index: 3;
+  left: calc(50% + 27px);
+  transform: rotate(-8deg);
+  animation: wave 0.8s alternate infinite ease-in-out;
+}
+.click1R { animation: waveLarm2 0.6s alternate infinite ease-in-out; }
+.click1L { animation: waveLarm2 0.6s alternate infinite ease-in-out; }
+.click2R { animation: waveLarm3 0.07s alternate infinite ease-in-out; }
+.click2L { animation: waveLarm3 0.07s alternate infinite ease-in-out; }
+.none { animation: none; }
+
+@keyframes glide  {
+from { left: 0px; top: 0px; }
+to { left: 0px; top: 15px; }}
+
+/***************** MEDIA QUERIES ******************/
+@media ( max-width: 700px ) {
+  .container { flex-direction: column; }
+  button { padding: 5px 10px 5px 10px; margin: 10px; }
+  #moods { padding: 20px; }
+  #countdown { padding: 20px; }
+  html { font-size: 98%; }
+  footer { position: relative; text-align: right; margin-top: 40px; }
+}

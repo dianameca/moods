@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>NYE Countdown</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet"> 
+      <link rel="stylesheet" href="style.css"/>
+      <script src="countdown.js" defer></script>
+   </head>
+   <body>
+      <div class="container">
+         <div class="section">
+            <button id="mode">☀️</button>
+            <div id="moods">
+               <button id="hopeful" onclick="playMood(this.id);">🕊️</button>
+               <button id="soulful" onclick="playMood(this.id);">🙌</button>
+               <button id="nostalgic" onclick="playMood(this.id);">☁️</button>
+               <br>
+               <button id="motivated" onclick="playMood(this.id);">💪</button>
+               <button id="party" onclick="playMood(this.id);">🎉</button>
+               <button id="beachy" onclick="playMood(this.id);">🏖️</button>
+               <br>
+               <button id="happy" onclick="playMood(this.id);">😊</button>
+               <button id="romantic" onclick="playMood(this.id);">❤️</button>
+               <button id="pensive" onclick="playMood(this.id);">💭</button>
+               <br>
+               <button id="rockandroll" onclick="playMood(this.id);">🪨</button>
+               <button id="doowop" onclick="playMood(this.id);">💃</button>
+               <button id="taylor" onclick="playMood(this.id);">👱‍♀️</button>
+            </div>
+            <div>
+               <button id="toggleAudio"></button>
+            </div>
+         </div>
+         <div class="section">
+            <div id="selected-mood"></div>
+            <div id="year"></div>
+            <div id="countdown"></div>
+         </div>
+         <div class="section">
+            <div id="bonhomme">
+               <div class="wrapper">
+                  <div id="head" class="head"></div>
+                  <div id="torso" class="torso"></div>
+                  <div id="leftarm" class="leftarm"></div>
+                  <div id="rightarm" class="rightarm" ></div>
+                  <div id="leftleg" class="leftleg"></div>
+                  <div id="leftfoot" class="leftfoot"></div>
+                  <div id="rightleg" class="rightleg"></div>
+                  <div id="rightfoot" class="rightfoot"></div>
+               </div>
+               <button id="hide">Make it stop</button> 
+            </div>
+         </div>
+      </div>
+   </body>
+   <footer>
+   </footer>
+</html>
