@@ -71,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }
 
-  
   function updateMoodDisplay(title, footer) {
       moodDisplay.innerHTML = `<u>MOOD</u><br>${title}`; 
       document.querySelector('footer').innerHTML = footer;
@@ -79,11 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // play the audio for the selected mood
   function playMoodAudio(mood) {
-      if (!mood) {
-          console.log("no mood selected");
-          moodDisplay.innerHTML = "Please choose a mood before pressing PLAY.";
-          return; // exit early if no mood selected
-      }
       stopAudio();
       const moodConfigurations = {
           nostalgic: { title: "Nostalgic", footer: "<!--Compact - Fata din vis &nbsp • &nbsp Vama Veche - Epilog-->" },
@@ -114,6 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // play/pause listener for the audio toggle button
   audioToggleButton.addEventListener("click", () => {
       console.log("audio toggle button clicked");
+      let mood = null;
+      if (!mood) {
+        console.log("no mood selected");
+        moodDisplay.innerHTML = "Choose a mood before pressing <span style='color:red;font-size:120%;'>PLAY</span>";
+      }
       if (currentAudio) {
           if (currentAudio.paused) { // if audio is currently paused, play it
               currentAudio.play();
