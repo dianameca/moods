@@ -71,9 +71,9 @@ button:hover {
   text-shadow: none;
   box-shadow: none;
 }
-#mode {
+#theme {
   border: none;
-  font-size: x-small;
+  font-size: 200%;
   display: flex;
   margin-right: auto;
   margin-top: -20px;
@@ -81,7 +81,7 @@ button:hover {
   padding: 10px;
   text-shadow: none;
 }
-#mode:hover {
+#theme:hover {
   background-color: #fff;
 }
 #hide {

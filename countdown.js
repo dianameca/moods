@@ -2,7 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("script loaded");
 
   // state variables
-  let currentModeIndex = 0; // to cycle through mood icons
+  let currentMood = null;
+  // set up theme 
+  // options: light(0), color(1), dark(2)
+  let currentThemeIndex = 0; 
   let animationToggleCount = 0;
   let currentAudio = null; // holds current audio
   let isAutoPlayEnabled = false; // flag to see if playback is enabled after the first press
@@ -10,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // html element references
   const audioToggleButton = document.querySelector('#toggleAudio');
   const moodDisplay = document.querySelector('#selected-mood');
-  const modeToggleButton = document.querySelector('#mode');
+  const themeToggleButton = document.querySelector('#theme');
   const hideStickmanButton = document.querySelector('#hide');
   const countdownDisplayElement = document.querySelector("#countdown");
 
@@ -18,16 +21,33 @@ document.addEventListener("DOMContentLoaded", () => {
   audioToggleButton.innerHTML = "PLAY"; // set initial button text to PLAY
   moodDisplay.innerHTML = "Choose a mood, then press <span style='color:red;font-size:120%;'>PLAY</span>";
 
-  // update the current mode displayed on the mode button
-  function updateCurrentMode() {
-      const moodIcons = ["☀️", "🌈", "🌑"];
-      // update button text with the next mood icon
-      modeToggleButton.innerHTML = moodIcons[currentModeIndex % moodIcons.length];
-      currentModeIndex++; // increment for the next button press
+  /* GETTERS */
+
+  function getCurrentMood() {
+    return currentMood;
   }
-  modeToggleButton.addEventListener("click", () => {
-      console.log("mode toggle button clicked");
-      updateCurrentMode(); // update mode
+
+  function getCurrentTheme() {
+    const themes = ["☀️", "🌈", "🌑"];
+    return themes[currentThemeIndex];
+  }
+
+  /* SETTERS */
+
+  function setCurrentMood(mood) {
+    currentMood = mood;
+  }
+
+  function setCurrentTheme(index) {
+    const themes = ["☀️", "🌈", "🌑"];
+    currentThemeIndex = index % themes.length;
+    themeToggleButton.innerHTML = themes[currentThemeIndex];
+    console.log(`updated to ${themes[currentThemeIndex]}`);
+  }
+  
+  themeToggleButton.addEventListener("click", () => {
+      console.log("theme toggle button clicked");
+      setCurrentTheme(currentThemeIndex + 1);
   });
 
   // toggle stickman animations based on button presses
@@ -108,10 +128,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // play/pause listener for the audio toggle button
   audioToggleButton.addEventListener("click", () => {
       console.log("audio toggle button clicked");
-      let mood = null;
-      if (!mood) {
+      if (!getCurrentMood()) {
         console.log("no mood selected");
-        moodDisplay.innerHTML = "Choose a mood before pressing <span style='color:red;font-size:120%;'>PLAY</span>";
+        moodDisplay.innerHTML = "<span style='font-size:180%;'>⚠️</span>" + 
+                                " Choose a mood before pressing" + 
+                                " <span style='color:red;font-size:120%;'>PLAY</span>";
+        return;
       }
       if (currentAudio) {
           if (currentAudio.paused) { // if audio is currently paused, play it
@@ -130,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("#moods button").forEach(button => {
       button.addEventListener("click", () => {
           console.log(`${button.id} mood button clicked`);
+          setCurrentMood(button.id);
           playMoodAudio(button.id);
       });
   });
