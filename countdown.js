@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const moodConfigurations = {
           nostalgic: { title: "Nostalgic", footer: "<!--Compact - Fata din vis &nbsp • &nbsp Vama Veche - Epilog-->" },
           party: { title: "Party", footer: "Ms. Triniti - Let's Celebrate" },
-          pensive: { title: "Pensive", footer: "Neil Diamond - Heart of Gold" },
+          pensive: { title: "Pensive", footer: "Neil Young - Heart of Gold" },
           beachy: { title: "Beachy", footer: "Bob Marley and the Wailers - No Woman, No Cry" },
           motivated: { title: "Motivated", footer: "Michael Jackson - Man in the Mirror" },
           happy: { title: "Happy", footer: "King Harvest - Dancing in the Moonlight" },
