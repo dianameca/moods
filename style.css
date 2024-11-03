@@ -1,39 +1,68 @@
 /* style.css */
 
+/************* THEMES **************/
+
 :root {
   --background-color: #fff;
+  --bg-moods: #fff;
+  --bg-selected-mood: #fff;
+  --bg-wrapper: #fff;
+  --bg-countdown: #fff;
   --text-color: #000;
   --link-color: rgb(231, 58, 52);
-  --box-shadow: 1px 5px 20px #a2c2f8;
-}
-
-html[data-theme='light'] {
-  --background-color: #fff;
-  --text-color: #000;
-  --link-color: rgb(231, 58, 52);
-  --box-shadow: 1px 5px 20px #a2c2f8;
+  --box-shadow-color: #a2c2f8;
+  --stickman-outline-color: #000;
+  --stickman-inside-color: #fff;
+  --bg-button: #fff;
+  --bg-button-hover: #000;
+  --button-border-width: 3px;
+  --button-modifier-color: #000;
+  --button-border-color: #000000;
+  --button-border-width-modifier: 3px;
 }
 
 html[data-theme='color'] {
-  --background-color: #ffc5eb;
-  --text-color: #000;
-  --link-color: rgb(231, 58, 52);
-  --box-shadow: none;
+  --background-color: #fdf2f2;
+  --bg-moods: rgba(253, 84, 84, 0.938);
+  --bg-selected-mood: rgb(144, 255, 218);
+  --bg-wrapper: rgba(253, 84, 84, 0.938);
+  --bg-countdown: rgb(63, 230, 230);
+  --stickman-outline-color: #000;
+  --stickman-inside-color: #fff;
+  --box-shadow-color: #adaeb0;
+  --bg-button: #fff;
+  --bg-button-hover: #000;
+  --button-border-width: 3px;
+  --button-border-color: #060606;
+  --button-border-width-modifier: 3px;
+ 
 }
 
 html[data-theme='dark'] {
-  --background-color: #000;
-  --text-color: #F7F8F8;
-  --link-color: rgb(231, 58, 52);
-  --box-shadow: none;
+  --background-color: #393737;
+  --bg-moods: #1c1b1b;
+  --bg-selected-mood: #1c1b1b;
+  --bg-wrapper: #1c1b1b;
+  --bg-countdown: #1c1b1b;
+  --text-color: #e5e5e5;
+  --box-shadow-color: #1e1d1d;
+  --stickman-outline-color: #fff;
+  --stickman-inside-color: #1c1b1b;
+  --bg-button: #1c1b1b;
+  --bg-button-hover: #157e81;
+  --button-border-width: 3px;
+  --button-border-color: #e5e5e5;
+  --button-border-width-modifier: 6px;
 }
 
 /************* OVERALLS **************/
+
 html {
+  background-color: var(--background-color);
   font-family: 'Montserrat', sans-serif;
   color: var(--text-color);
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
 }
 html a {
   color: var(--text-color);
@@ -44,72 +73,83 @@ a:hover {
 img {
   width: 500px;
   height: 300px;
-  padding: 5px;
-  margin: 10px auto;
+  margin: 40px auto;
   max-width: 100%;
   position: relative;
   animation: glide 2s ease-in-out alternate infinite;
 }
 
 /************* BUTTON **************/
+
+/* Shared button styles */
 button {
-  border: 3px solid #000;
-  text-shadow: 2px 2px 2px #a2c2f8;
-  /*box-shadow: 5px 5px 5px #a2c2f8;*/
-  border-radius: 3px;
-  background-color: #fff;
-  padding: 15px 20px 15px 20px;
+  border: var(--button-border-width) solid var(--button-border-color);
+  background-color: var(--bg-button);
+  padding: 15px 20px;
   margin: 10px;
   font: inherit;
   letter-spacing: 2px;
-  font-size: 105%;
   cursor: pointer;
 }
+
+/* Modifier styles for .action class */
+button.action {
+  font-size: 22px;
+  border: var(--button-border-width-modifier) solid var(--button-modifier-color);
+}
+
 button:hover {
-  background-color: rgb(0, 0, 0);
+  background-color: var(--bg-button-hover);
   color: red;
   text-shadow: none;
   box-shadow: none;
 }
+
 #theme {
-  border: none;
-  font-size: 200%;
+  all: unset;
+  cursor: pointer;
+  font-size: 30px;
   display: flex;
   margin-right: auto;
-  margin-top: -20px;
+  margin-top: -50px;
   margin-left: -5px;
   padding: 10px;
-  text-shadow: none;
 }
-#theme:hover {
-  background-color: #fff;
-}
+
 #hide {
   background-color: #fff;
-  text-shadow: none;
 }
 
 /*************** SECTIONS ****************/
+
+#selected-mood, #countdown, #moods, .wrapper {
+  box-shadow: 1px 5px 20px var(--box-shadow-color);
+  padding: 40px;
+  border-radius: 7px;
+}
+
 #selected-mood {
-  border-radius: 7px;
   margin-bottom: 20px;
-  padding: 40px;
-  /*background-color: aquamarine;*/
-  box-shadow: var(--box-shadow);
+  background-color: var(--bg-selected-mood);
 }
+
 #countdown {
-  border-radius: 7px;
-  padding: 40px;
-  /*background-color: rgb(11, 245, 245);*/
-  box-shadow: var(--box-shadow);
+  background-color: var(--bg-countdown);
 }
+
 #moods {
-  border-radius: 7px;
-  padding: 30px;
+  background-color: var(--bg-moods);
   color: var(--text-color);
-  /*background-color: rgba(253, 84, 84, 0.938);*/
-  box-shadow: var(--box-shadow);
 }
+
+/*THIS IS THE STICKMAN WRAPPER*/
+.wrapper {
+  height: 300px;
+  position: relative;
+  margin: 40px 0 40px 0;
+  background-color: var(--bg-wrapper);
+}
+
 #toggleAudio {
   margin-top: 50px;
   text-shadow: none;
@@ -120,12 +160,12 @@ button:hover {
 .container {
   display: flex;
 }
+
 .section {
+  margin: 30px 10px 30px 10px;
   padding: 15px;
   text-align: center;
   flex: 1;
-  /* border: 1px solid rgb(209, 209, 209);
-     just to see the spacing better */
 }
 
 /*********** TABLE ************/
@@ -141,21 +181,12 @@ th,td {
 
 /*********** FOOTER ************/
 footer {
-  font-size: 13px;
+  font-size: 15px;
   bottom: 5px;
   right: 5px;
   position: fixed;
-  font-style: italic;
 }
-.wrapper {
-  height: 380px;
-  position: relative;
-  margin: 30px 10px 30px 10px;
-  box-shadow: var(--box-shadow);
-  border-radius: 7px;
-  /*background-color: rgba(253, 84, 84, 0.938)*/;
-}
-/* stop button messes with this */
+
 @keyframes rock {
   0% { transform: rotate(-15deg); }
   50% { transform: rotate(15deg); }
@@ -191,87 +222,129 @@ footer {
 .head, .torso, .leftleg, 
 .rightleg, .rightarm, .leftarm, 
 .rightfoot, .leftfoot {
-  border: 4px solid #000;
-  background-color: #fff;
+  border: 4px solid var(--stickman-outline-color);
+  background-color: var(--stickman-inside-color);
   border-radius: 4px;
   display: block;
   position: absolute;
-  background-color: rgba(229, 229, 229, 1);
 }
 .head {
-  width: 52px;
-  height: 58px;
+  width: 54px;
+  height: 62px;
   border-radius: 50%;
-  top: 50px;
-  left: calc(50% - 22px);
+  top: 47px;
+  left: calc(50% - 32px);
   z-index: 1;
   animation: rock 0.8s alternate infinite;
   transform-origin: center bottom;
 }
 .torso {
-  width: 17px;
+  width: 19px;
   height: 85px;
   top: 118px;
   z-index: 2;
-  left: calc(50% - 4.5px);;
+  left: calc(50% - 14.5px);;
 }
 .leftleg {
-  width: 9px;
+  width: 10px;
   height: 103px;
   top: 200px;
   z-index: 3;
-  left: calc(50% - 5px);
+  left: calc(50% - 15px);
   transform: rotate(15deg);
   transform-origin: top;
 }
 .rightleg {
-  width: 9px;
+  width: 10px;
   height: 103px;
   top: 200px;
   z-index: 2;
-  left: calc(50% + 5px);
+  left: calc(50% - 5px);
   transform: rotate(-12deg);
   transform-origin: top;
 }
 .leftarm {
   width: 80px;
-  height: 7px;
+  height: 8px;
   top: 120px;
   z-index: 3;
-  left: calc(50% - 87px);
+  left: calc(50% - 97px);
   transform: rotate(-70deg);
   transform-origin: 100%;
 }
 .rightarm {
   width: 77px;
-  height: 7px;
+  height: 8px;
   top: 123px;
-  left: calc(50% + 14px);
+  left: calc(50% + 4px);
   transform: rotate(70deg);
   transform-origin: 0%;
 }
 .leftfoot {
   width: 30px;
-  height: 9px;
+  height: 10px;
   top: 303px;
   z-index: 3;
-  left: calc(50% - 34px);
+  left: calc(50% - 44px);
   transform: rotate(8deg);
 }
 .rightfoot {
   width: 30px;
-  height: 9px;
+  height: 10px;
   top: 298px;
   z-index: 3;
-  left: calc(50% + 27px);
+  left: calc(50% + 17px);
   transform: rotate(-8deg);
   animation: wave 0.8s alternate infinite ease-in-out;
 }
-.click1R { animation: waveLarm2 0.6s alternate infinite ease-in-out; }
-.click1L { animation: waveLarm2 0.6s alternate infinite ease-in-out; }
-.click2R { animation: waveLarm3 0.07s alternate infinite ease-in-out; }
-.click2L { animation: waveLarm3 0.07s alternate infinite ease-in-out; }
-.none { animation: none; }
+
+@keyframes rock {
+  0% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+}
+@keyframes wave {
+  0% { transform: rotate(10deg); }
+  50% { transform: rotate(-30deg); }
+}
+@keyframes waveLarm1 {
+  0% { transform: rotate(-80deg); }
+  40% { transform: rotate(-70deg); }
+}
+@keyframes waveRarm1 {
+  0% { transform: rotate(80deg); }
+  40% { transform: rotate(70deg); }
+}
+@keyframes waveLarm2 {
+  100% { transform: rotate(360deg); }
+}
+@keyframes waveRarm2 {
+  0% { transform: rotate(30deg); }
+  100% { transform: rotate(70deg); }
+}
+@keyframes waveLarm3 {
+  0% { transform: rotate(-30deg); }
+  100% { transform: rotate(20deg); }
+}
+@keyframes waveRarm3 {
+  0% { transform: rotate(-30deg); }
+  100% { transform: rotate(-30deg); }
+}
+
+.click1R { 
+  animation: waveLarm2 0.6s alternate infinite ease-in-out; 
+}
+.click1L { 
+  animation: waveLarm2 0.6s alternate infinite ease-in-out; 
+}
+.click2R { 
+  animation: waveLarm3 0.07s alternate infinite ease-in-out; 
+}
+.click2L { 
+  animation: waveLarm3 0.07s alternate infinite ease-in-out;
+}
+.none { 
+  animation: none; 
+}
 
 @keyframes glide  {
 from { left: 0px; top: 0px; }
@@ -283,6 +356,6 @@ to { left: 0px; top: 15px; }}
   button { padding: 5px 10px 5px 10px; margin: 10px; }
   #moods { padding: 20px; }
   #countdown { padding: 20px; }
-  html { font-size: 98%; }
+  #theme { font-size: 25px; padding: 10px; }
   footer { position: relative; text-align: right; margin-top: 40px; }
 }
