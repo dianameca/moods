@@ -38,25 +38,49 @@
          <div class="section">
             <div id="selected-mood"></div>
             <br>
-            <div id="year"></div>
-            <div id="countdown"></div>
+            <div id="countdown">
+               <div id="countdownDisplay" style="text-align: center; font-size: 110%">
+                  Countdown to <span id="year"></span>
+                  <br>
+                  <br>
+                  <table style="margin: auto; text-align: left;">
+                      <tr>
+                          <td id="days" class="number"></td>
+                          <td class="label">days</td>
+                      </tr>
+                      <tr>
+                          <td id="hours" class="number"></td>
+                          <td class="label">hours</td>
+                      </tr>
+                      <tr>
+                          <td id="minutes" class="number"></td>
+                          <td class="label">minutes</td>
+                      </tr>
+                      <tr>
+                          <td id="seconds" class="number"></td>
+                          <td class="label">seconds</td>
+                      </tr>
+                  </table>
+              </div>
+              <pre id="asciiArt" style="font-family: monospace; white-space: pre;"></pre><!-- Container for ASCII art -->
+            </div>
          </div>
          <div class="section">
             <div id="stickman">
                <div class="wrapper">
-                  <div id="head" class="head"></div>
-                  <div id="torso" class="torso"></div>
-                  <div id="leftarm" class="leftarm"></div>
-                  <div id="rightarm" class="rightarm" ></div>
-                  <div id="leftleg" class="leftleg"></div>
-                  <div id="leftfoot" class="leftfoot"></div>
-                  <div id="rightleg" class="rightleg"></div>
-                  <div id="rightfoot" class="rightfoot"></div>
+                  <div id="head" class="stickman"></div>
+                  <div id="torso" class="stickman"></div>
+                  <div id="leftarm" class="stickman"></div>
+                  <div id="rightarm" class="stickman" ></div>
+                  <div id="leftleg" class="stickman"></div>
+                  <div id="leftfoot" class="stickman"></div>
+                  <div id="rightleg" class="stickman"></div>
+                  <div id="rightfoot" class="stickman"></div>
                </div>
                <button class="action" id="hide">Make it stop</button> 
             </div>
          </div>
       </div>
+      <footer></footer>
    </body>
-   <footer></footer>
 </html>

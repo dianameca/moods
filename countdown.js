@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const moodDisplay = document.querySelector('#selected-mood');
   const themeToggleButton = document.querySelector('#theme');
   const hideStickmanButton = document.querySelector('#hide');
-  const countdownDisplayElement = document.querySelector("#countdown");
 
   // initial ui
   audioToggleButton.innerHTML = "PLAY"; // set initial button text to PLAY
@@ -170,43 +169,70 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  // update countdown display until the new year
+  /******* COUNTDOWN *******/
+  
+  const nextYear = new Date().getFullYear() + 1;
+  let nextNewYear = new Date(nextYear, 0, 1);
+  let celebrationEndTime; // track when to revert to the countdown
+  let newYearCelebration = false;
+
+  const daysElement = document.querySelector('#days');
+  const hoursElement = document.querySelector('#hours');
+  const minutesElement = document.querySelector('#minutes');
+  const secondsElement = document.querySelector('#seconds');
+  const yearElement = document.querySelector('#year');
+  const footerElement = document.querySelector('footer');
+
+  const newYearMessage = "We made it! 🎊<br>Happy New Year! 🎉";
+
+  const msInSecond = 1000;
+  const msInMinute = msInSecond * 60;
+  const msInHour = msInMinute * 60;
+  const msInDay = msInHour * 24;
+
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  footerElement.textContent = `TIME ZONE: ${userTimeZone}`;
+
   function updateCountdownDisplay() {
-    const nextYear = new Date().getFullYear() + 1;
-    const nextNewYear = new Date(nextYear, 0, 1);
     const currentTime = new Date();
-    const timeRemaining = nextNewYear.getTime() - currentTime.getTime();
+    const timeRemaining = nextNewYear - currentTime;
 
-    const daysLeft = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-    const hoursLeft = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutesLeft = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-    const secondsLeft = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    if (timeRemaining <= 0) {
+        // set flag and end time to 24 hours later
+        newYearCelebration = true;
+        celebrationEndTime = new Date(currentTime.getTime() + msInDay);
+        // display New Year message, skip countdown update
+        document.querySelector('#countdownDisplay').innerHTML = newYearMessage;
+        return;
+    }
+    if (newYearCelebration) {
+        // check if 24 hours passed
+        if (currentTime >= celebrationEndTime) {
+            newYearCelebration = false;
+            nextNewYear = new Date(nextYear + 1, 0, 1); // prep for the next New Year
+            updateCountdownDisplay(); // restart countdown
+            return;
+        }
+        document.querySelector('#countdownDisplay').innerHTML = newYearMessage;
+        return;
+    }
 
-    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    document.querySelector('footer').innerHTML = `TIME ZONE: ${userTimeZone}`;
+    const daysLeft = Math.floor(timeRemaining / msInDay);
+    const hoursLeft = Math.floor((timeRemaining % msInDay) / msInHour);
+    const minutesLeft = Math.floor((timeRemaining % msInHour) / msInMinute);
+    const secondsLeft = Math.floor((timeRemaining % msInMinute) / msInSecond);
 
-    countdownDisplayElement.innerHTML = `
-        <div style="text-align: center; font-size: 110%">Countdown to ${nextYear}</div>
-        <table style="margin: auto; text-align: left;">
-        <br>
-            <tr>
-                <td class="number">${daysLeft}</td>
-                <td class="label">days</td>
-            </tr>
-            <tr>
-                <td class="number">${hoursLeft}</td>
-                <td class="label">hours</td>
-            </tr>
-            <tr>
-                <td class="number">${minutesLeft}</td>
-                <td class="label">minutes</td>
-            </tr>
-            <tr>
-                <td class="number">${secondsLeft}</td>
-                <td class="label">seconds</td>
-            </tr>
-        </table>
-    `;
+    daysElement.textContent = daysLeft;
+    hoursElement.textContent = hoursLeft;
+    minutesElement.textContent = minutesLeft;
+    secondsElement.textContent = secondsLeft;
+    yearElement.textContent = nextYear;
   }
-  setInterval(updateCountdownDisplay, 1000);
+
+  function update() {
+    updateCountdownDisplay();
+    requestAnimationFrame(update);
+  }
+
+  update();
 });

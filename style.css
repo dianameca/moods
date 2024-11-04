@@ -1,5 +1,3 @@
-/* style.css */
-
 /************* THEMES **************/
 
 :root {
@@ -79,7 +77,7 @@ img {
   animation: glide 2s ease-in-out alternate infinite;
 }
 
-/************* BUTTON **************/
+/************* BUTTONS **************/
 
 /* Shared button styles */
 button {
@@ -120,7 +118,7 @@ button:hover {
   background-color: #fff;
 }
 
-/*************** SECTIONS ****************/
+/*************** AREAS ****************/
 
 #selected-mood, #countdown, #moods, .wrapper {
   box-shadow: 1px 5px 20px var(--box-shadow-color);
@@ -142,7 +140,7 @@ button:hover {
   color: var(--text-color);
 }
 
-/*THIS IS THE STICKMAN WRAPPER*/
+/* THIS IS THE STICKMAN WRAPPER */
 .wrapper {
   height: 300px;
   position: relative;
@@ -187,6 +185,8 @@ footer {
   position: fixed;
 }
 
+/*********** ANIMATION ***********/
+
 @keyframes rock {
   0% { transform: rotate(-15deg); }
   50% { transform: rotate(15deg); }
@@ -219,16 +219,14 @@ footer {
   100% { transform: rotate(-30deg); }
 }
 
-.head, .torso, .leftleg, 
-.rightleg, .rightarm, .leftarm, 
-.rightfoot, .leftfoot {
+.stickman {
   border: 4px solid var(--stickman-outline-color);
   background-color: var(--stickman-inside-color);
   border-radius: 4px;
   display: block;
   position: absolute;
 }
-.head {
+#head {
   width: 54px;
   height: 62px;
   border-radius: 50%;
@@ -238,14 +236,14 @@ footer {
   animation: rock 0.8s alternate infinite;
   transform-origin: center bottom;
 }
-.torso {
+#torso {
   width: 19px;
   height: 85px;
   top: 118px;
   z-index: 2;
   left: calc(50% - 14.5px);;
 }
-.leftleg {
+#leftleg {
   width: 10px;
   height: 103px;
   top: 200px;
@@ -254,7 +252,7 @@ footer {
   transform: rotate(15deg);
   transform-origin: top;
 }
-.rightleg {
+#rightleg {
   width: 10px;
   height: 103px;
   top: 200px;
@@ -263,7 +261,7 @@ footer {
   transform: rotate(-12deg);
   transform-origin: top;
 }
-.leftarm {
+#leftarm {
   width: 80px;
   height: 8px;
   top: 120px;
@@ -272,7 +270,7 @@ footer {
   transform: rotate(-70deg);
   transform-origin: 100%;
 }
-.rightarm {
+#rightarm {
   width: 77px;
   height: 8px;
   top: 123px;
@@ -280,7 +278,7 @@ footer {
   transform: rotate(70deg);
   transform-origin: 0%;
 }
-.leftfoot {
+#leftfoot {
   width: 30px;
   height: 10px;
   top: 303px;
@@ -288,7 +286,7 @@ footer {
   left: calc(50% - 44px);
   transform: rotate(8deg);
 }
-.rightfoot {
+#rightfoot {
   width: 30px;
   height: 10px;
   top: 298px;
