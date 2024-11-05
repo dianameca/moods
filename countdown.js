@@ -63,9 +63,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (moodDetails) {
           currentAudio = new Audio(`assets/audio/${mood}`);
           updateMoodDisplay(moodDetails.title);
+
+        // explicitly restart audio
+        currentAudio.addEventListener("ended", () => {
           if (isAutoPlayEnabled) {
-              currentAudio.play(); // play the audio automatically if enabled
-              audioToggleButton.innerHTML = "PAUSE"; // change button text to PAUSE when playing
+              currentAudio.play();
+          }
+        });
+
+        if (isAutoPlayEnabled) {
+          currentAudio.play(); // play the audio automatically if enabled
+          audioToggleButton.innerHTML = "PAUSE";
           }
       }
   }
@@ -81,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       if (currentAudio) {
-          currentAudio.loop = true; // loop audio indefinitely
+          currentAudio.loop = false; // force false, handle manually
           if (currentAudio.paused) {
               currentAudio.play();
               audioToggleButton.innerHTML = "PAUSE";
