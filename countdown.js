@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const audioToggleButton = document.querySelector('#toggleAudio');
   const moodDisplay = document.querySelector('#selected-mood');
   const themeToggleButton = document.querySelector('#theme');
-  const hideStickmanButton = document.querySelector('#hide');
   
   // init display
   audioToggleButton.innerHTML = "PLAY";
@@ -109,45 +108,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let animationToggleCount = 0;
 
-  // toggle stickman animations based on button presses
-  function toggleStickmanAnimation() {
-    console.log("hide stickman button clicked");
-    // select all the parts
-    const stickmanParts = document.querySelectorAll
-                      ('#head, #torso, #leftleg, #rightleg, #rightarm, #leftarm, #rightfoot, #leftfoot');
-    animationToggleCount++; // increment with each button press
+  const hideStickmanButton = document.querySelector('#hide');
+  const stickmanParts = document.querySelectorAll('#head, #torso, #leftleg, #rightleg, #rightarm, #leftarm, #rightfoot, #leftfoot');
 
-    if (animationToggleCount === 1) {
-        document.querySelector('#rightarm').classList.add("click1R");
-        document.querySelector('#leftarm').classList.add("click1L");
-        document.querySelector('#rightfoot').classList.add("none");
-        hideStickmanButton.innerHTML += "!";
-        console.log(animationToggleCount)
+  function initialize() {
+    hideStickmanButton.innerHTML = "Make it stop";
+  }
 
-    } else if (animationToggleCount === 2) {
-        document.querySelector('#rightarm').classList.add("none");
-        document.querySelector('#leftarm').classList.add("none");
-        document.querySelector('#leftleg').classList.add("click1L");
-        document.querySelector('#leftfoot').classList.add("click1L");
-        hideStickmanButton.innerHTML += "!";
-        console.log(animationToggleCount)
+  function louder() {
+    hideStickmanButton.innerHTML += "!"
+  }
 
-    } else if (animationToggleCount === 3) {
-        document.querySelector('#leftleg').classList.add("click1R");
-        document.querySelector('#rightleg').classList.add("click1L");
-        document.querySelector('#leftfoot').classList.replace("click1L", "none");
-        hideStickmanButton.innerHTML += "!";
-        console.log(animationToggleCount)
+  function resetStickman() {
+    stickmanParts.forEach(part => {
+        part.classList.remove("click1R", "click1L", "none");
+    });
+  }
 
-    } else if (animationToggleCount > 3) {
-        document.querySelector('#stickman').innerHTML = 
-            "<div style='margin-top: 40px;font-size: 20px;'>Okay 😅</div>" +
-            "<img src='assets/img/dove.svg'>";
+  function animateStickman(step) {
+    resetStickman();
+    switch(step) {
+        case 1:
+            document.querySelector('#rightarm').classList.add("click1R");
+            document.querySelector('#leftarm').classList.add("click1L");
+            document.querySelector('#rightfoot').classList.add("none");
+            louder();
+            break;
+        case 2:
+            document.querySelector('#leftleg').classList.add("click1L");
+            document.querySelector('#leftfoot').classList.add("click1L");
+            louder();
+            break;
+        case 3:
+            document.querySelector('#leftleg').classList.add("click1R");
+            document.querySelector('#rightleg').classList.add("click1L");
+            louder();
+            break;
+        case 4:
+            displayFinalMessage();
+            break;
     }
   }
 
-  // attach event listener to hide button for toggling animations
-  hideStickmanButton.addEventListener("click", toggleStickmanAnimation);
+  function displayFinalMessage() {
+    document.querySelector('#stickman').innerHTML = 
+        "<div style='margin-top: 40px;font-size: 20px;'>Okay 😅</div>" +
+        "<img src='assets/img/dove.svg'>";
+  }
+
+  hideStickmanButton.addEventListener("click", () => {
+    animationToggleCount++;
+    animateStickman(animationToggleCount);
+ });
+ 
+ initialize();
 
   /******************************** 
    *        THEME CONTROLS
