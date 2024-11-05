@@ -1,99 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("script loaded");
 
-  // state variables
-  let currentMood = null;
-  // set up theme 
-  // options: light(0), color(1), dark(2)
-  let currentThemeIndex = 0; 
-  let animationToggleCount = 0;
-  let currentAudio = null; // holds current audio
-  let isAutoPlayEnabled = false; // flag to see if playback is enabled after the first press
-
-  // html element references
+  /********************************
+   *         UI ELEMENTS
+   ********************************/
   const audioToggleButton = document.querySelector('#toggleAudio');
   const moodDisplay = document.querySelector('#selected-mood');
   const themeToggleButton = document.querySelector('#theme');
   const hideStickmanButton = document.querySelector('#hide');
-
-  // initial ui
-  audioToggleButton.innerHTML = "PLAY"; // set initial button text to PLAY
+  
+  // init display
+  audioToggleButton.innerHTML = "PLAY";
   moodDisplay.innerHTML = "Choose a mood, then press " + 
-                        "<span style='color:red;font-size:120%;'>PLAY</span>";
+                            "<span style='color:red;font-size:120%;'>PLAY</span>";
 
-  /* GETTERS */
+  /********************************
+   *        AUDIO CONTROLS
+   ********************************/
+
+  let currentMood = null;
+  let currentAudio = null; 
+  let isAutoPlayEnabled = false; // flag to see if playback is enabled after the first press
 
   function getCurrentMood() {
     return currentMood;
   }
 
-  function getCurrentTheme() {
-    const themes = ["☀️", "🎨", "🌃"];
-    return themes[currentThemeIndex];
-  }
-
-  /* SETTERS */
-
   function setCurrentMood(mood) {
     currentMood = mood;
   }
-
-  function setCurrentTheme(index) {
-    const themes = ["light", "color", "dark"];
-    currentThemeIndex = index % themes.length;
-
-    const themeName = themes[currentThemeIndex];
-    document.documentElement.setAttribute('data-theme', themeName);
-
-    themeToggleButton.innerHTML = getCurrentTheme();
-    console.log(`updated to ${themeName}`);
-  }
-
-  setCurrentTheme(currentThemeIndex);
-  
-  themeToggleButton.addEventListener("click", () => {
-      console.log("theme toggle button clicked");
-      setCurrentTheme(currentThemeIndex + 1);
-  });
-
-  // toggle stickman animations based on button presses
-  function toggleStickmanAnimation() {
-      console.log("hide stickman button clicked");
-      // select all the parts
-      const stickmanParts = document.querySelectorAll
-                        ('#head, #torso, #leftleg, #rightleg, #rightarm, #leftarm, #rightfoot, #leftfoot');
-      animationToggleCount++; // increment with each button press
-
-      if (animationToggleCount === 1) {
-          document.querySelector('#rightarm').classList.add("click1R");
-          document.querySelector('#leftarm').classList.add("click1L");
-          document.querySelector('#rightfoot').classList.add("none");
-          hideStickmanButton.innerHTML += "!";
-          console.log(animationToggleCount)
-
-      } else if (animationToggleCount === 2) {
-          document.querySelector('#rightarm').classList.add("none");
-          document.querySelector('#leftarm').classList.add("none");
-          document.querySelector('#leftleg').classList.add("click1L");
-          document.querySelector('#leftfoot').classList.add("click1L");
-          hideStickmanButton.innerHTML += "!";
-          console.log(animationToggleCount)
-
-      } else if (animationToggleCount === 3) {
-          document.querySelector('#leftleg').classList.add("click1R");
-          document.querySelector('#rightleg').classList.add("click1L");
-          document.querySelector('#leftfoot').classList.replace("click1L", "none");
-          hideStickmanButton.innerHTML += "!";
-          console.log(animationToggleCount)
-  
-      } else if (animationToggleCount > 3) {
-          document.querySelector('#stickman').innerHTML = 
-              "<div style='margin-top: 40px;font-size: 20px;'>Okay 😅</div>" +
-              "<img src='assets/img/dove.svg'>";
-      }
-  }
-  // attach event listener to hide button for toggling animations
-  hideStickmanButton.addEventListener("click", toggleStickmanAnimation);
 
   // stop audio, reset audio state
   function stopAudio() {
@@ -104,8 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateMoodDisplay(title) {
-      moodDisplay.innerHTML = `<u>MOOD</u><br>${title}`; 
-      // document.querySelector('footer').innerHTML = footer;
+      moodDisplay.innerHTML = `<u>MOOD</u><br>${title}`;
   }
 
   // play the audio for the selected mood
@@ -148,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       if (currentAudio) {
+          currentAudio.loop = true; // loop audio indefinitely
           if (currentAudio.paused) {
               currentAudio.play();
               audioToggleButton.innerHTML = "PAUSE";
@@ -156,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
               stopAudio();
               isAutoPlayEnabled = false;
           }
-          currentAudio.loop = true; // loop audio indefinitely
       }
   });
 
@@ -169,7 +103,116 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  /******* COUNTDOWN *******/
+  /******************************** 
+   *      STICKMAN ANIMATION
+   ********************************/
+
+  let animationToggleCount = 0;
+
+  // toggle stickman animations based on button presses
+  function toggleStickmanAnimation() {
+    console.log("hide stickman button clicked");
+    // select all the parts
+    const stickmanParts = document.querySelectorAll
+                      ('#head, #torso, #leftleg, #rightleg, #rightarm, #leftarm, #rightfoot, #leftfoot');
+    animationToggleCount++; // increment with each button press
+
+    if (animationToggleCount === 1) {
+        document.querySelector('#rightarm').classList.add("click1R");
+        document.querySelector('#leftarm').classList.add("click1L");
+        document.querySelector('#rightfoot').classList.add("none");
+        hideStickmanButton.innerHTML += "!";
+        console.log(animationToggleCount)
+
+    } else if (animationToggleCount === 2) {
+        document.querySelector('#rightarm').classList.add("none");
+        document.querySelector('#leftarm').classList.add("none");
+        document.querySelector('#leftleg').classList.add("click1L");
+        document.querySelector('#leftfoot').classList.add("click1L");
+        hideStickmanButton.innerHTML += "!";
+        console.log(animationToggleCount)
+
+    } else if (animationToggleCount === 3) {
+        document.querySelector('#leftleg').classList.add("click1R");
+        document.querySelector('#rightleg').classList.add("click1L");
+        document.querySelector('#leftfoot').classList.replace("click1L", "none");
+        hideStickmanButton.innerHTML += "!";
+        console.log(animationToggleCount)
+
+    } else if (animationToggleCount > 3) {
+        document.querySelector('#stickman').innerHTML = 
+            "<div style='margin-top: 40px;font-size: 20px;'>Okay 😅</div>" +
+            "<img src='assets/img/dove.svg'>";
+    }
+  }
+
+  // attach event listener to hide button for toggling animations
+  hideStickmanButton.addEventListener("click", toggleStickmanAnimation);
+
+  /******************************** 
+   *        THEME CONTROLS
+   ********************************/
+
+  // options: light(0), color(1), dark(2)
+  let currentThemeIndex = 0; 
+
+  function getCurrentTheme() {
+    const themes = ["☀️", "🎨", "🌃"];
+    return themes[currentThemeIndex];
+  }
+
+  function setCurrentTheme(index) {
+    const themes = ["light", "color", "dark"];
+    currentThemeIndex = index % themes.length;
+
+    const themeName = themes[currentThemeIndex];
+    document.documentElement.setAttribute('data-theme', themeName);
+
+    themeToggleButton.innerHTML = getCurrentTheme();
+    console.log(`updated to ${themeName}`);
+  }
+
+  setCurrentTheme(currentThemeIndex);
+  
+  themeToggleButton.addEventListener("click", () => {
+      console.log("theme toggle button clicked");
+      setCurrentTheme(currentThemeIndex + 1);
+  });
+
+  /******************************** 
+   *     THEME FAST SWITCHING
+   ********************************/
+
+  let isFastSwitching = false;
+  let switchInterval;
+  let themeSwitchCount = 0;
+  const maxSwitches = 5;
+  
+  function startFastThemeSwitching() {
+      if (isFastSwitching) 
+        return; // false check
+      isFastSwitching = true;
+  
+      switchInterval = setInterval(() => {
+        if (themeSwitchCount < maxSwitches) {
+            setCurrentTheme(currentThemeIndex + 1);
+            themeSwitchCount++;
+            
+            console.log(`switch count: ${themeSwitchCount}`);
+        } else {
+            stopFastThemeSwitching();
+        }
+      }, 500); // tbd because headaches....
+  }
+  
+  function stopFastThemeSwitching() {
+      clearInterval(switchInterval);
+      isFastSwitching = false;
+  }
+
+  /******************************** 
+   *        COUNTDOWN TIMER
+   * ******************************/
   
   const nextYear = new Date().getFullYear() + 1;
   let nextNewYear = new Date(nextYear, 0, 1);
@@ -203,12 +246,15 @@ document.addEventListener("DOMContentLoaded", () => {
         celebrationEndTime = new Date(currentTime.getTime() + msInDay);
         // display New Year message, skip countdown update
         document.querySelector('#countdownDisplay').innerHTML = newYearMessage;
+
+        startFastThemeSwitching();
         return;
     }
-    if (newYearCelebration) {
+    if (newYearCelebration && currentTime >= celebrationEndTime) {
         // check if 24 hours passed
         if (currentTime >= celebrationEndTime) {
             newYearCelebration = false;
+            stopFastThemeSwitching();
             nextNewYear = new Date(nextYear + 1, 0, 1); // prep for the next New Year
             updateCountdownDisplay(); // restart countdown
             return;
