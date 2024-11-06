@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (currentAudio) {
           currentAudio.pause();
           audioToggleButton.innerHTML = "PLAY";
+          resetStickman();  // stop the stickman when audio is paused
       }
   }
 
@@ -74,7 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isAutoPlayEnabled) {
           currentAudio.play(); // play the audio automatically if enabled
           audioToggleButton.innerHTML = "PAUSE";
-          }
+          applyMoodDance(mood); // only trigger the dance when the audio is playing
+        }
       }
   }
 
@@ -93,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (currentAudio.paused) {
               currentAudio.play();
               audioToggleButton.innerHTML = "PAUSE";
+              applyMoodDance(getCurrentMood()); // trigger dance when audio starts playing
               isAutoPlayEnabled = true;
           } else {
               stopAudio();
@@ -118,9 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const hideStickmanButton = document.querySelector('#hide');
   const stickmanParts = document.querySelectorAll('#head, #torso, #leftleg, #rightleg, #rightarm, #leftarm, #rightfoot, #leftfoot');
+  const stickmanDanceParts = document.querySelectorAll('#leftleg, #rightleg, #rightarm, #leftarm');
 
   function initialize() {
     hideStickmanButton.innerHTML = "Make it stop";
+    document.querySelector('#rightfoot').classList.add("foot-bopping");
+    document.querySelector('#head').classList.add("head-bopping");
   }
 
   function louder() {
@@ -129,7 +135,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function resetStickman() {
     stickmanParts.forEach(part => {
-        part.classList.remove("click1R", "click1L", "none");
+      // remove general tempo and specific dance classes
+      part.classList.remove("fast-tempo", "medium-tempo", "slow-tempo", "foot-bopping");
+
+      // Remove any class that starts with "dance-" for specific moods
+      part.classList.forEach(cls => {
+          if (cls.startsWith("dance-")) {
+              part.classList.remove(cls);
+          }
+      });
+    });
+  }
+
+  // add mood-specific dance to stickman (TODO)
+  function applyMoodDance(mood) {
+    document.querySelector('#rightleg').classList.add("dance-right-leg");
+    document.querySelector('#leftleg').classList.add("dance-left-leg");
+
+    // temporary hacky fast tempo for some moods...
+    if (mood === "party" || mood === "doowop" || mood === "rockandroll") {
+      resetStickman();
+      addTempoToDanceParts("fast");
+    }
+  }
+
+  function addTempoToDanceParts(tempo) {
+    stickmanDanceParts.forEach(part => {
+        // add tempo classes to each part
+        // slow, medium, fast
+        part.classList.add(`${tempo}-tempo`);
     });
   }
 
@@ -137,28 +171,23 @@ document.addEventListener("DOMContentLoaded", () => {
     resetStickman();
     switch(step) {
         case 1:
-            document.querySelector('#rightarm').classList.add("click1R");
-            document.querySelector('#leftarm').classList.add("click1L");
-            document.querySelector('#rightfoot').classList.add("none");
+            addTempoToDanceParts("medium");
             louder();
             break;
         case 2:
-            document.querySelector('#leftleg').classList.add("click1L");
-            document.querySelector('#leftfoot').classList.add("click1L");
+            addTempoToDanceParts("fast");
+            document.querySelector('#stickman').classList.add("area-spin");
             louder();
             break;
         case 3:
-            document.querySelector('#leftleg').classList.add("click1R");
-            document.querySelector('#rightleg').classList.add("click1L");
-            louder();
-            break;
-        case 4:
-            displayFinalMessage();
+            clearDisplayFinalMessage();
             break;
     }
   }
 
-  function displayFinalMessage() {
+  function clearDisplayFinalMessage() {
+    stickman.className = '';
+    hideStickmanButton.style.display = "none";
     document.querySelector('#stickman').innerHTML = 
         "<div style='margin-top: 40px;font-size: 20px;'>Okay 😅</div>" +
         "<img src='assets/img/dove.svg'>";
@@ -167,9 +196,9 @@ document.addEventListener("DOMContentLoaded", () => {
   hideStickmanButton.addEventListener("click", () => {
     animationToggleCount++;
     animateStickman(animationToggleCount);
- });
+  });
  
- initialize();
+  initialize();
 
   /******************************** 
    *        THEME CONTROLS

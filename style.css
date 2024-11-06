@@ -1,5 +1,4 @@
 /************* THEMES **************/
-
 :root {
   --background-color: #fff;
   --bg-moods: #fff;
@@ -10,7 +9,7 @@
   --link-color: rgb(231, 58, 52);
   --box-shadow-color: #a2c2f8;
   --stickman-outline-color: #000;
-  --stickman-inside-color: #fff;
+  --stickman-inside-color: #ffffff;
   --bg-button: #fff;
   --bg-button-hover: #000;
   --button-border-width: 3px;
@@ -18,7 +17,6 @@
   --button-border-color: #000000;
   --button-border-width-modifier: 3px;
 }
-
 html[data-theme='color'] {
   --background-color: #fdf2f2;
   --bg-moods: rgba(253, 84, 84, 0.938);
@@ -33,9 +31,7 @@ html[data-theme='color'] {
   --button-border-width: 3px;
   --button-border-color: #060606;
   --button-border-width-modifier: 3px;
- 
 }
-
 html[data-theme='dark'] {
   --background-color: #393737;
   --bg-moods: #1c1b1b;
@@ -54,7 +50,6 @@ html[data-theme='dark'] {
 }
 
 /************* OVERALLS **************/
-
 html {
   background-color: var(--background-color);
   font-family: 'Montserrat', sans-serif;
@@ -89,20 +84,17 @@ button {
   letter-spacing: 2px;
   cursor: pointer;
 }
-
 /* Modifier styles for .action class */
 button.action {
   font-size: 22px;
   border: var(--button-border-width-modifier) solid var(--button-modifier-color);
 }
-
 button:hover {
   background-color: var(--bg-button-hover);
   color: red;
   text-shadow: none;
   box-shadow: none;
 }
-
 #theme {
   all: unset;
   cursor: pointer;
@@ -113,33 +105,27 @@ button:hover {
   margin-left: -5px;
   padding: 10px;
 }
-
 #hide {
   background-color: #fff;
 }
 
 /*************** AREAS ****************/
-
 #selected-mood, #countdown, #moods, .wrapper {
   box-shadow: 1px 5px 20px var(--box-shadow-color);
   padding: 40px;
   border-radius: 7px;
 }
-
 #selected-mood {
   margin-bottom: 20px;
   background-color: var(--bg-selected-mood);
 }
-
 #countdown {
   background-color: var(--bg-countdown);
 }
-
 #moods {
   background-color: var(--bg-moods);
   color: var(--text-color);
 }
-
 /* THIS IS THE STICKMAN WRAPPER */
 .wrapper {
   height: 300px;
@@ -147,7 +133,6 @@ button:hover {
   margin: 40px 0 40px 0;
   background-color: var(--bg-wrapper);
 }
-
 #toggleAudio {
   margin-top: 50px;
   text-shadow: none;
@@ -158,7 +143,6 @@ button:hover {
 .container {
   display: flex;
 }
-
 .section {
   margin: 30px 10px 30px 10px;
   padding: 15px;
@@ -186,39 +170,6 @@ footer {
 }
 
 /*********** ANIMATION ***********/
-
-@keyframes rock {
-  0% { transform: rotate(-15deg); }
-  50% { transform: rotate(15deg); }
-}
-@keyframes wave {
-  0% { transform: rotate(10deg); }
-  50% { transform: rotate(-30deg); }
-}
-@keyframes waveLarm1 {
-  0% { transform: rotate(-80deg); }
-  40% { transform: rotate(-70deg); }
-}
-@keyframes waveRarm1 {
-  0% { transform: rotate(80deg); }
-  40% { transform: rotate(70deg); }
-}
-@keyframes waveLarm2 {
-  100% { transform: rotate(360deg); }
-}
-@keyframes waveRarm2 {
-  0% { transform: rotate(30deg); }
-  100% { transform: rotate(70deg); }
-}
-@keyframes waveLarm3 {
-  0% { transform: rotate(-30deg); }
-  100% { transform: rotate(20deg); }
-}
-@keyframes waveRarm3 {
-  0% { transform: rotate(-30deg); }
-  100% { transform: rotate(-30deg); }
-}
-
 .stickman {
   border: 4px solid var(--stickman-outline-color);
   background-color: var(--stickman-inside-color);
@@ -233,7 +184,6 @@ footer {
   top: 47px;
   left: calc(50% - 32px);
   z-index: 1;
-  animation: rock 0.8s alternate infinite;
   transform-origin: center bottom;
 }
 #torso {
@@ -246,7 +196,7 @@ footer {
 #leftleg {
   width: 10px;
   height: 103px;
-  top: 200px;
+  top: 207px;
   z-index: 3;
   left: calc(50% - 15px);
   transform: rotate(15deg);
@@ -255,8 +205,8 @@ footer {
 #rightleg {
   width: 10px;
   height: 103px;
-  top: 200px;
-  z-index: 2;
+  top: 207px;
+  z-index: 1;
   left: calc(50% - 5px);
   transform: rotate(-12deg);
   transform-origin: top;
@@ -273,7 +223,7 @@ footer {
 #rightarm {
   width: 77px;
   height: 8px;
-  top: 123px;
+  top: 120px;
   left: calc(50% + 4px);
   transform: rotate(70deg);
   transform-origin: 0%;
@@ -281,79 +231,171 @@ footer {
 #leftfoot {
   width: 30px;
   height: 10px;
-  top: 303px;
   z-index: 3;
-  left: calc(50% - 44px);
-  transform: rotate(8deg);
+  left: calc(50% - 9px);
+  transform: rotate(-6deg);
+  position: absolute;
+  bottom: -15px;
 }
 #rightfoot {
   width: 30px;
   height: 10px;
-  top: 298px;
   z-index: 3;
-  left: calc(50% + 17px);
-  transform: rotate(-8deg);
-  animation: wave 0.8s alternate infinite ease-in-out;
+  left: calc(50% - 9px);
+  transform: rotate(-6deg);
+  position: absolute;
+  bottom: -12px;
 }
 
+/******************* IMAGE GLIDE **********************/
+@keyframes glide {
+  from { 
+    left: 0px; top: 0px; 
+  }
+  to { 
+    left: 0px; top: 15px; 
+  }
+}
+
+/******************* HEAD AND FOOT BOPPING **********************/
+@keyframes wave {
+  0% { transform: rotate(10deg); }
+  50% { transform: rotate(-20deg); }
+}
+.foot-bopping {
+  animation: wave 0.8s alternate infinite ease-in-out;
+}
 @keyframes rock {
   0% { transform: rotate(-15deg); }
   50% { transform: rotate(15deg); }
 }
-@keyframes wave {
-  0% { transform: rotate(10deg); }
-  50% { transform: rotate(-30deg); }
+.head-bopping {
+  animation: rock 0.8s alternate infinite;
 }
-@keyframes waveLarm1 {
+
+/******************* TEMPO ANIMATIONS *******************/
+@keyframes tempoSlow {
+  0% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+}
+.slow-tempo {
+  animation: tempoSlow 1.5s alternate infinite ease-in-out;
+}
+@keyframes tempoMedium {
   0% { transform: rotate(-80deg); }
-  40% { transform: rotate(-70deg); }
+  50% { transform: rotate(70deg); }
+  100% { transform: rotate(-80deg); }
 }
-@keyframes waveRarm1 {
-  0% { transform: rotate(80deg); }
-  40% { transform: rotate(70deg); }
+.medium-tempo {
+  animation: tempoMedium 0.6s alternate infinite ease-in-out;
 }
-@keyframes waveLarm2 {
-  100% { transform: rotate(360deg); }
-}
-@keyframes waveRarm2 {
-  0% { transform: rotate(30deg); }
-  100% { transform: rotate(70deg); }
-}
-@keyframes waveLarm3 {
+@keyframes tempoFast {
   0% { transform: rotate(-30deg); }
-  100% { transform: rotate(20deg); }
+  100% { transform: rotate(30deg); }
 }
-@keyframes waveRarm3 {
-  0% { transform: rotate(-30deg); }
-  100% { transform: rotate(-30deg); }
+.fast-tempo {
+  animation: tempoFast 0.07s alternate infinite ease-in-out;
 }
 
-.click1R { 
-  animation: waveLarm2 0.6s alternate infinite ease-in-out; 
-}
-.click1L { 
-  animation: waveLarm2 0.6s alternate infinite ease-in-out; 
-}
-.click2R { 
-  animation: waveLarm3 0.07s alternate infinite ease-in-out; 
-}
-.click2L { 
-  animation: waveLarm3 0.07s alternate infinite ease-in-out;
-}
-.none { 
-  animation: none; 
+/******************* STICKMAN SECTION SPIN *******************/
+.area-spin {
+  animation: tempoMedium 2s ease-in-out infinite;
 }
 
-@keyframes glide  {
-from { left: 0px; top: 0px; }
-to { left: 0px; top: 15px; }}
+/******************* ARMS *******************/
+
+/* right leg rotate forward and backward */
+@keyframes moveRightLeg {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(30deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* left leg to rotate in opposite direction */
+@keyframes moveLeftLeg {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(-30deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.dance-right-leg { 
+  animation: moveRightLeg 1s ease-in-out infinite;
+}
+
+.dance-left-leg {
+  animation: moveLeftLeg 1s ease-in-out infinite;
+}
+
+/******************* ARMS & LEGS *******************/
+@keyframes moveLegsAndArms {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(45deg); }
+  100% { transform: rotate(0deg); }
+}
+.dance-move {
+  animation: moveLegsAndArms 1s ease-in-out infinite;
+}
+
+/******************* MOOD DANCES : TODO *******************/
+.dance-hopeful {
+  animation: tempoSlow 2s ease-in-out infinite;
+}
+.dance-soulful {
+  animation: tempoMedium 2s ease-in-out infinite;
+}
+.dance-chill {
+  animation: tempoFast 1s infinite;
+}
+.dance-motivated {
+  animation: tempoSlow 2s ease-in-out infinite;
+}
+.dance-party {
+  animation: tempoMedium 0.5s infinite;
+}
+.dance-beachy {
+  animation: tempoFast 2s ease-in-out infinite;
+}
+.dance-happy {
+  animation: tempoSlow 2s ease-in-out infinite;
+}
+.dance-romantic {
+  animation: tempoMedium 2s ease-in-out infinite;
+}
+.dance-pensive {
+  animation: tempoFast 2s ease-in-out infinite;
+}
+.dance-rockandroll {
+  animation: tempoSlow 2s ease-in-out infinite;
+}
+.dance-doowop {
+  animation: tempoMedium 2s ease-in-out infinite;
+}
+.dance-taylor {
+  animation: tempoFast 2s ease-in-out infinite;
+}
 
 /***************** MEDIA QUERIES ******************/
 @media ( max-width: 700px ) {
-  .container { flex-direction: column; }
-  button { padding: 5px 10px 5px 10px; margin: 10px; }
-  #moods { padding: 20px; }
-  #countdown { padding: 20px; }
-  #theme { font-size: 25px; padding: 10px; }
-  footer { position: relative; text-align: right; margin-top: 40px; }
+  .container {
+    flex-direction: column;
+  }
+  button {
+    padding: 5px 10px 5px 10px;
+    margin: 10px;
+  }
+  #moods {
+    padding: 20px;
+  }
+  #countdown {
+    padding: 20px;
+  }
+  #theme {
+    font-size: 25px;
+    padding: 10px;
+  }
+  footer {
+    position: relative;
+    text-align: right;
+    margin-top: 40px;
+  }
 }
