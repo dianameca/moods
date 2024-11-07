@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("script loaded");
+  localStorage.clear();
 
   /********************************
    *         UI ELEMENTS
@@ -10,16 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // init display
   audioToggleButton.innerHTML = "PLAY";
-  moodDisplay.innerHTML = "Choose a mood, then press " + 
-                            "<span style='color:red;font-size:120%;'>PLAY</span>";
+  moodDisplay.innerHTML = "Choose a mood, then press PLAY";
 
   /********************************
    *        AUDIO CONTROLS
    ********************************/
-
   let currentMood = null;
-  let currentAudio = null; 
-  let isAutoPlayEnabled = false; // flag to see if playback is enabled after the first press
+  let currentAudio = null;
+  // check if playback is enabled after the first press
+  let isAutoPlayEnabled = false;
 
   function getCurrentMood() {
     return currentMood;
@@ -85,9 +85,9 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("audio toggle button clicked");
       if (!getCurrentMood()) {
         console.log("no mood selected");
-        moodDisplay.innerHTML = "<span style='font-size:180%;'>⚠️</span>" + 
+        moodDisplay.innerHTML = "<span style='font-size:180%;'>‼️</span>" + 
                                 " Choose a mood before pressing" + 
-                                " <span style='color:red;font-size:120%;'>PLAY</span>";
+                                " PLAY";
         return;
       }
       if (currentAudio) {
@@ -95,8 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
           if (currentAudio.paused) {
               currentAudio.play();
               audioToggleButton.innerHTML = "PAUSE";
-              applyMoodDance(getCurrentMood()); // trigger dance when audio starts playing
               isAutoPlayEnabled = true;
+              // edge case : stickman is hidden
+              applyMoodDance(getCurrentMood()); // trigger dance when audio starts playing
           } else {
               stopAudio();
               isAutoPlayEnabled = false;
@@ -116,10 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
   /******************************** 
    *      STICKMAN ANIMATION
    ********************************/
-
   let animationToggleCount = 0;
 
   const hideStickmanButton = document.querySelector('#hide');
+  const hideStickmanWrapper = document.querySelector('#stickman');
   const stickmanParts = document.querySelectorAll('#head, #torso, #leftleg, #rightleg, #rightarm, #leftarm, #rightfoot, #leftfoot');
   const stickmanDanceParts = document.querySelectorAll('#leftleg, #rightleg, #rightarm, #leftarm');
 
@@ -138,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // remove general tempo and specific dance classes
       part.classList.remove("fast-tempo", "medium-tempo", "slow-tempo", "foot-bopping");
 
-      // Remove any class that starts with "dance-" for specific moods
+      // remove dance specific classes for moods
       part.classList.forEach(cls => {
           if (cls.startsWith("dance-")) {
               part.classList.remove(cls);
@@ -161,8 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function addTempoToDanceParts(tempo) {
     stickmanDanceParts.forEach(part => {
-        // add tempo classes to each part
-        // slow, medium, fast
+        // add tempo class: slow, medium, fast
         part.classList.add(`${tempo}-tempo`);
     });
   }
@@ -188,8 +188,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearDisplayFinalMessage() {
     stickman.className = '';
     hideStickmanButton.style.display = "none";
-    document.querySelector('#stickman').innerHTML = 
-        "<div style='margin-top: 40px;font-size: 20px;'>Okay 😅</div>" +
+    hideStickmanWrapper.style.display = "none";
+    document.querySelector('#dove').innerHTML = 
+        "<div class='dialog'>Okay 😅</div>" +
         "<img src='assets/img/dove.svg'>";
   }
 
@@ -205,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
    ********************************/
 
   // options: light(0), color(1), dark(2)
-  let currentThemeIndex = 0; 
+  let currentThemeIndex = 2; 
 
   function getCurrentTheme() {
     const themes = ["☀️", "🎨", "🌃"];
@@ -237,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isFastSwitching = false;
   let switchInterval;
   let themeSwitchCount = 0;
-  const maxSwitches = 5;
+  const maxSwitches = 6;
   
   function startFastThemeSwitching() {
       if (isFastSwitching) 
@@ -253,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             stopFastThemeSwitching();
         }
-      }, 500); // tbd because headaches....
+      }, 400); // tbd because headaches....
   }
   
   function stopFastThemeSwitching() {
@@ -275,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const minutesElement = document.querySelector('#minutes');
   const secondsElement = document.querySelector('#seconds');
   const yearElement = document.querySelector('#year');
-  const footerElement = document.querySelector('footer');
+  const timezoneElement = document.querySelector('#timezone');
 
   const newYearMessage = "We made it! 🎊<br>Happy New Year! 🎉";
 
@@ -285,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const msInDay = msInHour * 24;
 
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  footerElement.textContent = `TIME ZONE: ${userTimeZone}`;
+  timezoneElement.innerHTML = `<u>Time Zone</u><br> ${userTimeZone}`;
 
   function updateCountdownDisplay() {
     const currentTime = new Date();
@@ -294,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (timeRemaining <= 0) {
         // set flag and end time to 24 hours later
         newYearCelebration = true;
-        celebrationEndTime = new Date(currentTime.getTime() + msInDay);
+        celebrationEndTime = new Date(currentTime.getTime() + msInMinute);
         // display New Year message, skip countdown update
         document.querySelector('#countdownDisplay').innerHTML = newYearMessage;
 
@@ -331,5 +332,5 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(update);
   }
 
-  update();
+  update();  
 });

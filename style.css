@@ -1,52 +1,61 @@
 /************* THEMES **************/
 :root {
-  --background-color: #fff;
-  --bg-moods: #fff;
-  --bg-selected-mood: #fff;
-  --bg-wrapper: #fff;
-  --bg-countdown: #fff;
-  --text-color: #000;
-  --link-color: rgb(231, 58, 52);
+  --background-color: #ffffff;
+  --bg-moods: #ffffff;
+  --bg-selected-mood: #ffffff;
+  --bg-wrapper: #ffffff;
+  --bg-countdown: #ffffff;
+  --bg-timezone: #ffffff;
+  --text-color: #000000;
   --box-shadow-color: #a2c2f8;
-  --stickman-outline-color: #000;
-  --stickman-inside-color: #ffffff;
-  --bg-button: #fff;
-  --bg-button-hover: #000;
+  --stickman-outline-color: #000000;
+  --stickman-inside-color: #fefefe;
+  --bg-button: #ffffff;
+  --bg-button-hover: #000000;
+  --button-hover-text: #ffffff;
   --button-border-width: 3px;
-  --button-modifier-color: #000;
+  --button-modifier-color: #000000;
   --button-border-color: #000000;
   --button-border-width-modifier: 3px;
+  --number-color: #ff0000;
 }
-html[data-theme='color'] {
-  --background-color: #fdf2f2;
-  --bg-moods: rgba(253, 84, 84, 0.938);
-  --bg-selected-mood: rgb(144, 255, 218);
-  --bg-wrapper: rgba(253, 84, 84, 0.938);
-  --bg-countdown: rgb(63, 230, 230);
-  --stickman-outline-color: #000;
-  --stickman-inside-color: #fff;
+/* saturated, square colors */
+html[data-theme='color'] { 
+  --background-color: #f2f6fd;
+  --bg-moods:#bc3dff;
+  --bg-selected-mood:#3de1ff;
+  --bg-wrapper:#fd5454;
+  --bg-countdown:#00fa92;
+  --bg-timezone: #00fa92;
+  --stickman-outline-color: #000000;
+  --stickman-inside-color: #ffffff;
   --box-shadow-color: #adaeb0;
-  --bg-button: #fff;
-  --bg-button-hover: #000;
+  --bg-button: #ffffff;
+  --bg-button-hover: #3d61ff;
+  --button-hover-text: #ffffff;
   --button-border-width: 3px;
   --button-border-color: #060606;
   --button-border-width-modifier: 3px;
+  --number-color: #000000;
 }
 html[data-theme='dark'] {
-  --background-color: #393737;
-  --bg-moods: #1c1b1b;
-  --bg-selected-mood: #1c1b1b;
-  --bg-wrapper: #1c1b1b;
-  --bg-countdown: #1c1b1b;
-  --text-color: #e5e5e5;
-  --box-shadow-color: #1e1d1d;
-  --stickman-outline-color: #fff;
-  --stickman-inside-color: #1c1b1b;
-  --bg-button: #1c1b1b;
-  --bg-button-hover: #157e81;
+  --background-color: #003852;
+  --bg-moods: #001925;
+  --bg-selected-mood: #001925;
+  --bg-wrapper: #001925;
+  --bg-countdown: #001925;
+  --bg-timezone: #001925;
+  --text-color: #f0f0f0;
+  --box-shadow-color: #002130;
+  --stickman-outline-color: #00aee3;
+  --stickman-inside-color: #000000;
+  --bg-button: #002a3e;
+  --bg-button-hover: #000000;
+  --button-hover-text: #ffffff;
   --button-border-width: 3px;
-  --button-border-color: #e5e5e5;
-  --button-border-width-modifier: 6px;
+  --button-border-color: #00aee3;
+  --button-border-width-modifier: 3px;
+  --number-color: #ff0000;
 }
 
 /************* OVERALLS **************/
@@ -55,68 +64,73 @@ html {
   font-family: 'Montserrat', sans-serif;
   color: var(--text-color);
   font-weight: bold;
-  font-size: 22px;
+  font-size: 23px;
+  line-height: 30px;
 }
 html a {
   color: var(--text-color);
 }
 a:hover {
-  color:rgb(231, 58, 52);
+  color:#e73a34;
 }
 img {
-  width: 500px;
-  height: 300px;
+  width: 550px;
+  height: 350px;
   margin: 40px auto;
   max-width: 100%;
+  min-width: 70%;
   position: relative;
   animation: glide 2s ease-in-out alternate infinite;
 }
 
 /************* BUTTONS **************/
 
-/* Shared button styles */
+/* shared button styles */
 button {
   border: var(--button-border-width) solid var(--button-border-color);
   background-color: var(--bg-button);
-  padding: 15px 20px;
-  margin: 10px;
   font: inherit;
-  letter-spacing: 2px;
+  font-size: 27px;
+  padding: 15px 21px;
+  margin: 10px;
   cursor: pointer;
+  box-shadow: 1px 1px 10px var(--box-shadow-color);
 }
-/* Modifier styles for .action class */
+/* modifier styles for .action class */
 button.action {
-  font-size: 22px;
+  color: var(--text-color);
+  background-color: var(--bg-button);
+  font-size: 23px;
   border: var(--button-border-width-modifier) solid var(--button-modifier-color);
 }
 button:hover {
   background-color: var(--bg-button-hover);
-  color: red;
-  text-shadow: none;
+  color: var(--button-hover-text);
   box-shadow: none;
 }
 #theme {
   all: unset;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 25px;
   display: flex;
   margin-right: auto;
-  margin-top: -50px;
-  margin-left: -5px;
-  padding: 10px;
+  position:fixed;
+  margin-top: -30px;
+  z-index: 4;
 }
-#hide {
-  background-color: #fff;
+.dialog {
+  margin-top: 40px;
+  font-size: 20px;
 }
 
 /*************** AREAS ****************/
-#selected-mood, #countdown, #moods, .wrapper {
+#selected-mood, #countdown, #moods, #timezone, #stickman {
   box-shadow: 1px 5px 20px var(--box-shadow-color);
-  padding: 40px;
-  border-radius: 7px;
+  padding: 50px 40px;
+  margin: 10px 0 30px 0;
+  border-radius: 10px;
 }
 #selected-mood {
-  margin-bottom: 20px;
   background-color: var(--bg-selected-mood);
 }
 #countdown {
@@ -126,47 +140,44 @@ button:hover {
   background-color: var(--bg-moods);
   color: var(--text-color);
 }
-/* THIS IS THE STICKMAN WRAPPER */
-.wrapper {
+#timezone {
+  background-color: var(--bg-timezone);
+}
+#stickman {
   height: 300px;
   position: relative;
-  margin: 40px 0 40px 0;
   background-color: var(--bg-wrapper);
-}
-#toggleAudio {
-  margin-top: 50px;
-  text-shadow: none;
-  background-color: #fff;
 }
 
 /*************** LAYOUT ***************/
 .container {
   display: flex;
+  flex-wrap: wrap;
 }
 .section {
-  margin: 30px 10px 30px 10px;
-  padding: 15px;
+  margin: 30px 10px;
+  padding: 5px;
   text-align: center;
   flex: 1;
 }
 
 /*********** TABLE ************/
-.center {
-  margin-left: auto;
-  margin-right: auto;
+table {
+  margin: auto;
 }
-th,td {
+th {
+  padding: 5px 0px;
+  text-align: center;
+}
+td.number {
+  color:  var(--number-color);
+  padding: 5px 25px 5px 0px;
+  display: inline-block;
+  width: 2em;
+  text-align: right;
+}
+td.label {
   text-align: left;
-  padding: 5px 10px 5px 10px;
-  color: var(--text-color);
-}
-
-/*********** FOOTER ************/
-footer {
-  font-size: 15px;
-  bottom: 5px;
-  right: 5px;
-  position: fixed;
 }
 
 /*********** ANIMATION ***********/
@@ -191,7 +202,7 @@ footer {
   height: 85px;
   top: 118px;
   z-index: 2;
-  left: calc(50% - 14.5px);;
+  left: calc(50% - 14.5px);
 }
 #leftleg {
   width: 10px;
@@ -282,9 +293,9 @@ footer {
   animation: tempoSlow 1.5s alternate infinite ease-in-out;
 }
 @keyframes tempoMedium {
-  0% { transform: rotate(-80deg); }
-  50% { transform: rotate(70deg); }
-  100% { transform: rotate(-80deg); }
+  0% { transform: rotate(-50deg); }
+  50% { transform: rotate(50deg); }
+  100% { transform: rotate(-50deg); }
 }
 .medium-tempo {
   animation: tempoMedium 0.6s alternate infinite ease-in-out;
@@ -294,12 +305,12 @@ footer {
   100% { transform: rotate(30deg); }
 }
 .fast-tempo {
-  animation: tempoFast 0.07s alternate infinite ease-in-out;
+  animation: tempoFast 0.1s alternate infinite ease-in-out;
 }
 
 /******************* STICKMAN SECTION SPIN *******************/
 .area-spin {
-  animation: tempoMedium 2s ease-in-out infinite;
+  animation: tempoMedium 3s ease-in-out infinite;
 }
 
 /******************* ARMS *******************/
@@ -375,23 +386,25 @@ footer {
 }
 
 /***************** MEDIA QUERIES ******************/
-@media ( max-width: 700px ) {
+@media ( max-width: 1100px ) {
+  html, button {
+    font-size: 21px;
+  }
+  button {
+    padding: 10px 16px;
+  }
   .container {
     flex-direction: column;
   }
-  button {
-    padding: 5px 10px 5px 10px;
-    margin: 10px;
+  .dialog {
+    margin-top: 0px;
   }
-  #moods {
-    padding: 20px;
+  #moods, #countdown, #selected-mood {
+    padding: 50px 20px;
   }
-  #countdown {
-    padding: 20px;
-  }
-  #theme {
-    font-size: 25px;
-    padding: 10px;
+  #selected-mood, #stickman {
+    padding: 50px 40px;
+    margin: -40px 0 30px 0;
   }
   footer {
     position: relative;

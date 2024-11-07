@@ -13,23 +13,30 @@
    <body>
       <div class="container">
          <div class="section">
-            <button id="theme" >☀️</button>
+            <button id="theme"></button>
             <div id="moods">
-               <button id="hopeful">🕊️</button>
-               <button id="soulful">🙌</button>
-               <button id="chill">🌅</button>
-               <br>
-               <button id="motivated">💪</button>
-               <button id="party">🎉</button>
-               <button id="beachy">🏖️</button>
-               <br>
-               <button id="happy">😊</button>
-               <button id="romantic">❤️</button>
-               <button id="pensive">💭</button>
-               <br>
-               <button id="rockandroll">🏔️</button>
-               <button id="doowop">💃</button>
-               <button id="taylor">👱‍♀️</button>
+               <table>
+                  <tr>
+                     <td class="mood"><button id="hopeful">🕊️</button></td>
+                     <td class="mood"><button id="soulful">🙌</button></td>
+                     <td class="mood"><button id="chill">🌅</button></td>
+                  </tr>
+                  <tr>
+                     <td class="mood"><button id="motivated">💪</button></td>
+                     <td class="mood"><button id="party">🎉</button></td>
+                     <td class="mood"><button id="beachy">🏖️</button></td>
+                  </tr>
+                  <tr>
+                     <td class="mood"><button id="happy">😊</button></td>
+                     <td class="mood"><button id="romantic">❤️</button></td>
+                     <td class="mood"><button id="pensive">💭</button></td>
+                  </tr>
+                  <tr>
+                     <td class="mood"><button id="rockandroll">🏔️</button></td>
+                     <td class="mood"><button id="doowop">💃</button></td>
+                     <td class="mood"><button id="taylor">👱‍♀️</button></td>
+                  </tr>
+               </table>
             </div>
             <div>
                <button class="action" id="toggleAudio"></button>
@@ -37,51 +44,48 @@
          </div>
          <div class="section">
             <div id="selected-mood"></div>
-            <br>
             <div id="countdown">
-               <div id="countdownDisplay" style="text-align: center; font-size: 110%">
-                  Countdown to <span id="year"></span>
-                  <br>
-                  <br>
-                  <table style="margin: auto; text-align: left;">
-                      <tr>
-                          <td id="days" class="number"></td>
-                          <td class="label">days</td>
-                      </tr>
-                      <tr>
-                          <td id="hours" class="number"></td>
-                          <td class="label">hours</td>
-                      </tr>
-                      <tr>
-                          <td id="minutes" class="number"></td>
-                          <td class="label">minutes</td>
-                      </tr>
-                      <tr>
-                          <td id="seconds" class="number"></td>
-                          <td class="label">seconds</td>
-                      </tr>
+               <div id="countdownDisplay">
+                  <table>
+                     <th colspan="2">
+                        <u>Countdown to <span id="year"></span></u>
+                     </th>
+                     <tr>
+                        <td id="days" class="number"></td>
+                        <td class="label">days</td>
+                     </tr>
+                     <tr>
+                        <td id="hours" class="number"></td>
+                        <td class="label">hours</td>
+                     </tr>
+                     <tr>
+                        <td id="minutes" class="number"></td>
+                        <td class="label">minutes</td>
+                     </tr>
+                     <tr>
+                        <td id="seconds" class="number"></td>
+                        <td class="label">seconds</td>
+                     </tr>
                   </table>
-              </div>
-            </div>
-         </div>
-         <div class="section">
-            <div id="stickman">
-               <div class="wrapper">
-                  <div id="head" class="stickman"></div>
-                  <div id="torso" class="stickman"></div>
-                  <div id="leftarm" class="stickman"></div>
-                  <div id="rightarm" class="stickman" ></div>
-                  <div id="leftleg" class="stickman">
-                     <div id="leftfoot" class="stickman"></div>
-                  </div>
-                  <div id="rightleg" class="stickman">
-                     <div id="rightfoot" class="stickman"></div>
-                  </div>
                </div>
             </div>
-            <button class="action" id="hide"></button> 
+            <div id="timezone"></div>
+         </div>
+         <div id="dove" class="section">
+            <div id="stickman">
+               <div id="head" class="stickman"></div>
+               <div id="torso" class="stickman"></div>
+               <div id="leftarm" class="stickman"></div>
+               <div id="rightarm" class="stickman" ></div>
+               <div id="leftleg" class="stickman">
+                  <div id="leftfoot" class="stickman"></div>
+               </div>
+               <div id="rightleg" class="stickman">
+                  <div id="rightfoot" class="stickman"></div>
+               </div>
+            </div>
+            <button class="action" id="hide"></button>
          </div>
       </div>
-      <footer></footer>
    </body>
 </html>
