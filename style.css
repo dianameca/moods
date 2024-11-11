@@ -29,7 +29,7 @@ html[data-theme='color'] {
   --bg-timezone: #00fa92;
   --stickman-outline-color: #000000;
   --stickman-inside-color: #ffffff;
-  --box-shadow-color: #adaeb0;
+  --box-shadow-color: #c1c1c1;
   --bg-button: #ffffff;
   --bg-button-hover: #3d61ff;
   --button-hover-text: #ffffff;
@@ -39,22 +39,22 @@ html[data-theme='color'] {
   --number-color: #000000;
 }
 html[data-theme='dark'] {
-  --background-color: #003852;
+  --background-color: #003249;
   --bg-moods: #001925;
   --bg-selected-mood: #001925;
   --bg-wrapper: #001925;
   --bg-countdown: #001925;
   --bg-timezone: #001925;
   --text-color: #f0f0f0;
-  --box-shadow-color: #002130;
+  --box-shadow-color: #003852;
   --stickman-outline-color: #00aee3;
   --stickman-inside-color: #000000;
   --bg-button: #002a3e;
   --bg-button-hover: #000000;
   --button-hover-text: #ffffff;
-  --button-border-width: 3px;
+  --button-border-width: 2px;
   --button-border-color: #00aee3;
-  --button-border-width-modifier: 3px;
+  --button-border-width-modifier: 2px;
   --number-color: #ff0000;
 }
 
@@ -64,7 +64,7 @@ html {
   font-family: 'Montserrat', sans-serif;
   color: var(--text-color);
   font-weight: bold;
-  font-size: 23px;
+  font-size: 21px;
   line-height: 30px;
 }
 html a {
@@ -101,7 +101,7 @@ button.action {
   color: var(--text-color);
   background-color: var(--bg-button);
   font-size: 23px;
-  border: var(--button-border-width-modifier) solid var(--button-modifier-color);
+  border: var(--button-border-width-modifier) solid var(--button-border-color);
 }
 button:hover {
   background-color: var(--bg-button-hover);
@@ -126,7 +126,7 @@ button:hover {
 /*************** AREAS ****************/
 #selected-mood, #countdown, #moods, #timezone, #stickman {
   box-shadow: 1px 5px 20px var(--box-shadow-color);
-  padding: 50px 40px;
+  padding: 45px;
   margin: 10px 0 30px 0;
   border-radius: 10px;
 }
