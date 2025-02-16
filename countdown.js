@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
           hopeful: { title: "Hopeful" }
       };
 
-      const moodDetails = moodConfigurations[mood]; // get mood details based on selection
+      const moodDetails = moodConfigurations[mood];
       if (moodDetails) {
           currentAudio = new Audio(`assets/audio/${mood}`);
           updateMoodDisplay(moodDetails.title);
@@ -136,10 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function resetStickman() {
     stickmanParts.forEach(part => {
-      // remove general tempo and specific dance classes
       part.classList.remove("fast-tempo", "medium-tempo", "slow-tempo", "foot-bopping");
 
-      // remove dance specific classes for moods
       part.classList.forEach(cls => {
           if (cls.startsWith("dance-")) {
               part.classList.remove(cls);
@@ -148,12 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // add mood-specific dance to stickman (TODO)
   function applyMoodDance(mood) {
     document.querySelector('#rightleg').classList.add("dance-right-leg");
     document.querySelector('#leftleg').classList.add("dance-left-leg");
 
-    // temporary hacky fast tempo for some moods...
     if (mood === "party" || mood === "doowop" || mood === "rockandroll") {
       resetStickman();
       addTempoToDanceParts("fast");
@@ -194,11 +190,43 @@ document.addEventListener("DOMContentLoaded", () => {
         "<img src='assets/img/dove.svg'>";
   }
 
+  /******************************** 
+   *           WILDCARD 
+   ********************************/
+  let wildcardAudio = new Audio('assets/audio/wildcard');
+  let wildcardAudioPlaying = false;
+
   hideStickmanButton.addEventListener("click", () => {
     animationToggleCount++;
     animateStickman(animationToggleCount);
+
+    if (animationToggleCount === 2) {
+        if (!wildcardAudioPlaying) {
+            audioToggleButton.disabled = true;
+            document.querySelectorAll("#moods button").forEach(button => {
+              button.disabled = true;
+            });
+            wildcardAudio.play();
+            wildcardAudio.loop = true;
+            wildcardAudioPlaying = true;
+            stopAudio();
+            applyMoodDance("party");
+        }
+    } else if (animationToggleCount === 3) {
+        if (wildcardAudioPlaying) {
+            audioToggleButton.disabled = false;
+            document.querySelectorAll("#moods button").forEach(button => {
+              button.disabled = false;
+            });
+            wildcardAudio.pause();
+            wildcardAudio.currentTime = 0;
+            wildcardAudioPlaying = false;
+            currentAudio.play();
+            audioToggleButton.innerHTML = "PAUSE";
+        }
+    }
   });
- 
+
   initialize();
 
   /******************************** 
@@ -254,7 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             stopFastThemeSwitching();
         }
-      }, 400); // tbd because headaches....
+      }, 400);
   }
   
   function stopFastThemeSwitching() {
